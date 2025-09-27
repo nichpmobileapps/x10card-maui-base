@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.HomePage"
+             xmlns:local="clr-namespace:X10Card.Models"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             >
+
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                   Grid.Column="1"
+                   FontSize="18"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_home.png" Clicked="Btn_home_Clicked"/>
+
+        <!--<ToolbarItem IconImageSource="refresh.png" Clicked="Btn_refresh_Clicked" Order="Primary"/>-->
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*, Auto">
+
+        <Grid Grid.Row="0" RowDefinitions="*, Auto" Margin="9">
+
+            <ScrollView Grid.Row="0" VerticalOptions="Fill">
+                <VerticalStackLayout Spacing="10">
+
+                    <Border Stroke="#078ff0" StrokeThickness="1" BackgroundColor="White" Padding="10">
+                        <VerticalStackLayout Spacing="5">
+                            <VerticalStackLayout HorizontalOptions="Center" IsVisible="True">
+                                <Image Source="ic_usericon.png" x:Name="candidateimage" Aspect="AspectFit" WidthRequest="50" HeightRequest="50"/>
+                            </VerticalStackLayout>
+                            <Label x:Name="lbl_header" BackgroundColor="#0072b6" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center" Padding="5,0"/>
+                            <Grid RowSpacing="5" ColumnSpacing="5" Margin="0, 5, 0, 0"
+                              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                              ColumnDefinitions="4.5*, 5.5*">
+                                <Label Grid.Row="0" Grid.Column="0" x:Name="Label_RenewalDatetext" Text="Renewal Date" FontAttributes="Bold" TextColor="#21610B" FontSize="16"/>
+                                <Label Grid.Row="0" Grid.Column="1" x:Name="Label_RenewalDate" TextColor="#21610B" FontAttributes="Bold" FontSize="16"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Registration No." TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="1" Grid.Column="1" x:Name="Label_registrationnumber" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="2" Grid.Column="0" Text="Exchange" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="2" Grid.Column="1" x:Name="Label_XchName" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="Registration Date" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="3" Grid.Column="1" x:Name="Label_RegDate" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="4" Grid.Column="0" Text="Address" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="4" Grid.Column="1" x:Name="Label_Address" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="5" Grid.Column="0" Text="Category" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="5" Grid.Column="1" x:Name="Label_Category" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="6" Grid.Column="0" Text="Date Of Birth" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="6" Grid.Column="1" x:Name="Label_DOB" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="7" Grid.Column="0" Text="Employment Status" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="7" Grid.Column="1" x:Name="Label_EmpStatus" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="8" Grid.Column="0" Text="Marital Status" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="8" Grid.Column="1" x:Name="Label_MaritalStatus" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="9" Grid.Column="0" Text="Mobile No." TextColor="Black" FontSize="16"/>
+                                <Label Grid.Row="9" Grid.Column="1" x:Name="Label_MobileNo" FontAttributes="Bold" TextColor="Black" FontSize="16"/>
+                            </Grid>
+                            <BoxView HorizontalOptions="Fill" HeightRequest="2" Color="#EF5627" Margin="0, 5"/>
+                            <Button Clicked="btn_renew_Clicked" IsVisible="false" Text="Renew" x:Name="btn_renew" FontAttributes="Bold" FontSize="18" TextColor="White" BackgroundColor="#FF9933" HorizontalOptions="Fill"/>
+                            <Label IsVisible="false" BackgroundColor="Transparent" x:Name="lbl_expired" Text="Expired. Kindly contact regional exchange." TextColor="Red" FontSize="16" HorizontalOptions="Fill" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            <Label IsVisible="true" BackgroundColor="Transparent" x:Name="lbl_renewtext" Text="Renewal button will activate during grace period." TextColor="ForestGreen" FontSize="16" HorizontalOptions="Fill" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            <BoxView HorizontalOptions="Fill" HeightRequest="2" Color="#EF5627" Margin="0, 5"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+                        <Button Grid.Column="0" Clicked="btn_qualification_Clicked" x:Name="btn_qualification" Text="Qualification" FontSize="16" BackgroundColor="#078ff0" TextColor="White" FontAttributes="Bold" />
+                        <Button Grid.Column="1" Clicked="btn_occupation_Clicked" x:Name="btn_occupation" Text="Occupation" FontSize="16" BackgroundColor="#078ff0" TextColor="White" FontAttributes="Bold" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+                        <Button Grid.Column="0" Clicked="btn_Vacancy_Clicked" x:Name="btn_Vacancy" Text="Vacancy" FontSize="16" BackgroundColor="#078ff0" TextColor="White" FontAttributes="Bold" />
+                        <Button Grid.Column="1" Clicked="btn_sponsorship_Clicked" x:Name="btn_sponsorship" Text="Sponsorship" FontSize="16" BackgroundColor="#078ff0" TextColor="White" FontAttributes="Bold" />
+                    </Grid>
+
+                    <Border Stroke="#078ff0" BackgroundColor="White" StrokeThickness="1" >
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="btn_JobFair_Clicked"/>
+                        </Border.GestureRecognizers>
+                        <HorizontalStackLayout HorizontalOptions="Center" BackgroundColor="Transparent" Spacing="5" Padding="5">
+                            <Label Text="Job Fair" FontSize="16" TextColor="#2196f3" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Image Source="Next_page.gif" IsAnimationPlaying="True" WidthRequest="30" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Label Grid.Row="1" x:Name="lbl_lastupdated" FontAttributes="Bold" FontSize="16" TextColor="Navy" Text=""
+               HorizontalTextAlignment="Center" Margin="0, 5, 0, 5" HorizontalOptions="Fill"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto" ColumnDefinitions="*, *, *, *">
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Fill">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Fill">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Emp. Status" Style="{StaticResource LabelStyle_TabMenu}" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Fill">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Fill">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+
+
+   
+        <ContentView x:Name="popupqualification" BackgroundColor="#C0808080" Padding="20" IsVisible="false"
+                     Grid.RowSpan="2" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White">
+                <Label x:Name="lbl_popupqualification" BackgroundColor="#0072b6" TextColor="White" Text="Qualification Details" Padding="6"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" HorizontalOptions="Fill"/>
+                <CollectionView x:Name="collection_qualification">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:QualificationDetails">
+                            <Border VerticalOptions="Start" Margin="10" StrokeThickness="1" Stroke="Silver" Padding="0" BackgroundColor="White" >
+                                <VerticalStackLayout>
+                                    <Label Padding="10" Text="{Binding QualDesc}" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button BackgroundColor="#0072b6" TextColor="White" FontAttributes="Bold" x:Name="popupqualificationCancel"
+                        Clicked="popupqualificationCancel_Clicked" Text="Close" Margin="5" HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+        </ContentView>
+
+        <ContentView x:Name="popupOccupation" BackgroundColor="#C0808080" Padding="20" IsVisible="false"
+                     Grid.RowSpan="2" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White">
+                <Label x:Name="lbl_popupOccupation" BackgroundColor="#0072b6" TextColor="White" Text="Occupation Details" Padding="6"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" HorizontalOptions="Fill" />
+                <CollectionView x:Name="collection_Occupation">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate  x:DataType="local:NCODetails">
+                            <Border VerticalOptions="Start" Margin="10" StrokeThickness="1" Stroke="Silver" Padding="0" BackgroundColor="White" >
+                                <VerticalStackLayout>
+                                    <Label Padding="10" Text="{Binding NCODesc}" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button BackgroundColor="#0072b6" TextColor="White" FontAttributes="Bold" x:Name="popupOccupationCancel"
+                        Clicked="popupOccupationCancel_Clicked" Text="Close" Margin="5" HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+        </ContentView>
+
+        <ContentView x:Name="popupvacancy" BackgroundColor="#C0808080" Padding="20" IsVisible="false"
+                     Grid.RowSpan="2" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White">
+                <Label x:Name="lbl_popupvacancy" BackgroundColor="#0072b6" TextColor="White" Text="All Vacancy Details" Padding="6"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" HorizontalOptions="Fill"/>
+                <CollectionView x:Name="collection_vacancy" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:AllVacancyDetails">
+                            <Border Padding="5" VerticalOptions="Start" Margin="10" StrokeThickness="1" Stroke="Silver" BackgroundColor="White" >
+                                <VerticalStackLayout Padding="0" Margin="0" Spacing="2">
+                                    <Label Text="Employer Name" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding EmployerName}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Description" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding vacdesc}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="No. Of Post" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding NoofPost}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Designation" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding VacDesgOfPost}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Age Between" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding agebw}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Interview Datetime" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding intdttm}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Interview Place" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding IntPlace}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Publish Date" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding PublishDt}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button BackgroundColor="#0072b6" TextColor="White" FontAttributes="Bold" x:Name="popupvacancyCancel"
+                        Clicked="popupvacancyCancel_Clicked" Text="Close" Margin="5" HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+        </ContentView>
+
+        <ContentView x:Name="popupsponsorship" BackgroundColor="#C0808080" Padding="20" IsVisible="false"
+             Grid.RowSpan="2" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+            <Grid HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="White"
+          RowDefinitions="Auto, *, Auto">
+
+                <Label Grid.Row="0" x:Name="lbl_popupsponsorship" BackgroundColor="#0072b6" TextColor="White" Text="Sponsorship Details" Padding="6"
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" HorizontalOptions="Fill"/>
+
+                <CollectionView Grid.Row="1" x:Name="collection_sponsorship" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:SponsorshipDetails">
+                            <Border Padding="5" VerticalOptions="Start" Margin="10" StrokeThickness="1" Stroke="Navy" BackgroundColor="White" >
+                                <VerticalStackLayout Padding="2" Spacing="2">
+                                    <Label Text="Employer Name" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding EmployerName}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Description" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding vacdesc}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="No. Of Post" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding NoofPost}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Designation" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding VacDesgOfPost}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Age Between" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding agebw}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Interview Datetime" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding intdttm}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Interview Place" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding IntPlace}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+                                    <Label Text="Publish Date" FontSize="16" HorizontalOptions="Fill" TextColor="Navy" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Label Text="{Binding PublishDt}" FontSize="16" HorizontalOptions="Fill" TextColor="Maroon" VerticalOptions="Center" />
+
+                                    <Border Padding="10" IsVisible="{Binding ApplyDtVisibility}" BackgroundColor="White" Stroke="#0072b6" StrokeThickness="1" Margin="0, 5, 0, 0">
+                                        <VerticalStackLayout Spacing="0">
+                                            <Label IsVisible="{Binding ApplyDtVisibility}" FontSize="16" Text="Apply Date" TextColor="Navy" FontAttributes="Bold"/>
+                                            <Label IsVisible="{Binding ApplyDtVisibility}" FontSize="16" Text="{Binding ApplyDt}" TextColor="Maroon"/>
+                                            <Label IsVisible="{Binding Attend_DtVisibility}" FontSize="16" Text="Attended Date" TextColor="Navy" FontAttributes="Bold"/>
+                                            <Label IsVisible="{Binding Attend_DtVisibility}" FontSize="16" Text="{Binding Attend_Dt}" TextColor="Maroon"/>
+                                            <Label IsVisible="{Binding Selected_DtVisibility}" FontSize="16" Text="Selected Date" TextColor="Navy" FontAttributes="Bold"/>
+                                            <Label IsVisible="{Binding Selected_DtVisibility}" FontSize="16" Text="{Binding Selected_Dt}" TextColor="Maroon"/>
+                                            <Label IsVisible="{Binding joindtVisibility}" FontSize="16" Text="Join Date" TextColor="Navy" FontAttributes="Bold"/>
+                                            <Label IsVisible="{Binding joindtVisibility}" FontSize="16" Text="{Binding joindt}" TextColor="Maroon"/>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button Grid.Row="2" BackgroundColor="#0072b6" TextColor="White" FontAttributes="Bold" x:Name="popupsponsorshipCancel"
+                Clicked="popupsponsorshipCancel_Clicked" Text="Close" Margin="5" HorizontalOptions="Fill"/>
+
+            </Grid>
+        </ContentView>
+
+        <ContentView x:Name="Loading_activity"
+          BackgroundColor="#C0808080"
+          Padding="20"
+          IsVisible="False"
+          AbsoluteLayout.LayoutBounds="0,0,1,1"
+          AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+                    Text="Please Wait ..."
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

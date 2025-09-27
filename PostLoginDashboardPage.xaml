@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.PostLoginDashboardPage"
+             Title="PostLoginDashboardPage"
+            xmlns:loca="clr-namespace:X10Card"
+            xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            ios:Page.UseSafeArea="True">
+
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                   Grid.Column="1"
+                   FontSize="18"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+
+
+    <ContentPage.ToolbarItems>
+            <ToolbarItem IconImageSource="ic_logout1.png" Clicked="ToolbarItem_Clicked" />
+        </ContentPage.ToolbarItems>
+
+        <!-- Main Content -->
+        <Grid Padding="9">
+            <ScrollView>
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Profile Card -->
+                    <Border Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="10">
+                        <VerticalStackLayout Spacing="15">
+
+                            <!-- Profile Image + Upload -->
+                            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                <Border Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 100"
+                                    HeightRequest="140"
+                                    WidthRequest="140"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                   >
+                                    <Image Source="ic_usericon.png"
+                                       x:Name="candidateimage"
+                                       Aspect="Fill"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                </Border>
+                                <ImageButton Source="ic_camera.png"
+                                         x:Name="imgbtn_uploadimage"
+                                         BackgroundColor="Transparent"
+                                         Clicked="imgbtn_uploadimage_Clicked" />
+                            </VerticalStackLayout>
+
+                            <!-- Candidate Data -->
+                            <VerticalStackLayout x:Name="stack_candidatedata" Spacing="10">
+                                <Label x:Name="lbl_header"
+                                   BackgroundColor="#078ff0"
+                                   TextColor="White"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Fill" />
+
+                                <Grid RowSpacing="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="Registration No." TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" x:Name="Label_registrationnumber" TextColor="Black" FontSize="16"/>
+
+                                    <Label Grid.Row="2" Text="Exchange Name" TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Grid.Row="3" x:Name="Label_XchName" TextColor="Black" FontSize="16"/>
+
+                                    <Label Grid.Row="4" Text="Registration Date" TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Grid.Row="5" x:Name="Label_RegDate" TextColor="Black" FontSize="16"/>
+
+                                    <Label Grid.Row="6" Text="Valid Upto" TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Grid.Row="7" x:Name="Label_ValidUpto" TextColor="Black" FontSize="16"/>
+
+                                    <Label Grid.Row="8" Text="Application Status" TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Grid.Row="9" x:Name="Label_ApplicationStatus" FontAttributes="Bold" FontSize="16"/>
+                                </Grid>
+                            </VerticalStackLayout>
+
+                            <!-- New User Data -->
+                            <VerticalStackLayout x:Name="stack_newuserdata" IsVisible="false" Spacing="10">
+                                <Label Text="Mobile No." TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                <Label x:Name="Label_mob" TextColor="Black" FontSize="16"/>
+
+                                <Label Text="Email Id" TextColor="#00468C" FontSize="16" FontAttributes="Bold"/>
+                                <Label x:Name="Label_email" TextColor="Black" FontSize="16"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Buttons -->
+                    <VerticalStackLayout Spacing="10">
+                        <Button IsVisible="false"
+                            x:Name="btn_viewdetails"
+                            FontSize="18"
+                            Text="View Details"
+                            BackgroundColor="#078ff0"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HorizontalOptions="Fill"
+                            Padding="5"
+                            FontAttributes="Bold"
+                            Clicked="btn_viewdetails_Clicked" />
+
+                        <Button x:Name="btn_newregister"
+                            FontSize="18"
+                            Text="New Registration"
+                            BackgroundColor="#078ff0"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HorizontalOptions="Fill"
+                            Padding="10"
+                            FontAttributes="Bold"
+                            Clicked="btn_newregister_Clicked" />
+
+                        <Button x:Name="btn_alreadyregister"
+                            FontSize="18"
+                            Text="Already Registered With Employment Exchange ?"
+                            BackgroundColor="#078ff0"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HorizontalOptions="Fill"
+                            Padding="10"
+                            FontAttributes="Bold"
+                            Clicked="btn_alreadyregister_Clicked" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Loading Overlay -->
+            <ContentView x:Name="Loading_activity"
+                     BackgroundColor="#C0808080"
+                     Padding="20"
+                     IsVisible="false"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                        <HorizontalStackLayout Spacing="10">
+                            <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                            <Label x:Name="lbl_PleaseWait"
+                               Text="Please Wait ..."
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </ContentView>
+        </Grid>
+    </ContentPage>

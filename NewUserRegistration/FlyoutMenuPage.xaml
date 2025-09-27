@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.NewUserRegistration.FlyoutMenuPage"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             Padding="0"
+              IconImageSource="hamburger.png"
+             Title="">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="10" RowSpacing="10">
+
+        <VerticalStackLayout Grid.Row="0" HorizontalOptions="Fill" Spacing="5">
+
+            <VerticalStackLayout>
+                <Border StrokeShape="RoundRectangle 100"
+                        HeightRequest="180"
+                        WidthRequest="100"
+                        HorizontalOptions="Center"
+                        Padding="0"
+                        >
+                    <Image Source="ic_usericon.png"
+                           x:Name="candidateimage"
+                           HorizontalOptions="Center"
+                           Aspect="Fill"
+                           VerticalOptions="Center" />
+                </Border>
+            </VerticalStackLayout>
+
+            <Label FontSize="18" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="{x:Static system:Environment.NewLine}"/>
+                            <Span Text="Welcome " TextColor="#078ff0"/>
+                            <Span x:Name="lbl_username" TextColor="#078ff0" />
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label FontSize="20" Text="Registration Details" TextColor="#078ff0" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <BoxView HeightRequest="2" BackgroundColor="#078ff0"/>
+
+        </VerticalStackLayout>
+
+
+        <CollectionView Grid.Row="1" x:Name="collectionViewFlyout" x:FieldModifier="public" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="{Binding MenuIcon}" />
+
+                        <Label Grid.Column="1"
+                               Margin="20,0"
+                               Text="{Binding Title}"
+                               FontSize="18"
+                               TextColor="{Binding Textcolor}"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+
+                     
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <BoxView Grid.Row="2" HeightRequest="2" BackgroundColor="#078ff0"/>
+
+        <VerticalStackLayout Grid.Row="2" Padding="0, 10, 0, 0">
+            <Label IsVisible="false"
+                   x:Name="lbl_finalsubmit"
+                   Text="Final Submit button will be visible, once Personal and Contact details are submitted"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   FontSize="12"/>
+            <Label Text="Last Updated" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="{Binding Source={x:Static system:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy} {0:HH\\:mm}'}"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

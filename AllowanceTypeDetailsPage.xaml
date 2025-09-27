@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.AllowanceTypeDetailsPage"
+             xmlns:local="clr-namespace:X10Card.Models">
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                 Grid.Column="1"
+                 FontSize="18"
+                 TextColor="White"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+
+    <Grid>
+        <Grid Margin="9" RowDefinitions="Auto, *, Auto">
+
+            <Label x:Name="lbl_header" Grid.Row="0" BackgroundColor="#0072b6" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+            <StackLayout Grid.Row="1" VerticalOptions="Fill">
+
+                <Border Stroke="#078ff0" VerticalOptions="Fill" BackgroundColor="White" StrokeShape="RoundRectangle 10" Margin="0,10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Padding="10">
+                            <Label x:Name="lbl_finyear" Text="Select Financial Year" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" TextColor="Navy"/>
+                            <Picker x:Name="picker_financeyear" SelectedIndexChanged="picker_financeyear_SelectedIndexChanged" TextColor="Maroon" 
+                                    Title="Select Financial Year" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <Label Text="#Tap on Month, Year or Amount to view bill details" HorizontalTextAlignment="Center" TextColor="Maroon" FontSize="14"/>
+
+                        <Grid BackgroundColor="#f2f2f7" Padding="5" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="Month, Year" Grid.Column="0" FontAttributes="Bold" TextColor="Navy" FontSize="18"/>
+                            <Label Text="Amount" Grid.Column="1" HorizontalTextAlignment="End" FontAttributes="Bold" TextColor="Maroon" FontSize="18"/>
+                        </Grid>
+
+                        <ListView ItemTapped="listview_allowancetypedetails_ItemTapped" x:Name="listview_allowancetypedetails" HasUnevenRows="True" SeparatorColor="Silver" SelectionMode="None" BackgroundColor="Transparent">
+                            <ListView.ItemTemplate >
+                                <DataTemplate x:DataType="local:AllowanceTransactions">
+                                    <ViewCell>
+                                        <StackLayout Margin="5">
+                                            <Grid Padding="10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="{Binding MonthYY}" Grid.Column="0" TextColor="Navy" HorizontalOptions="Fill" HorizontalTextAlignment="Start" FontSize="16" FontAttributes="Bold"/>
+                                                <Label Text="{Binding GrossAmount}" Grid.Column="1" TextColor="Maroon" HorizontalOptions="Fill" HorizontalTextAlignment="End" FontSize="16" FontAttributes="Bold"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Border>
+            </StackLayout>
+
+            <Grid Grid.Row="2" Style="{StaticResource FooterGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="2">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="3" >
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+        <ContentView x:Name="popupDetails" BackgroundColor="#C0808080" Padding="20, 20" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Border Stroke="Navy" Padding="2">
+                    <StackLayout BackgroundColor="White" Spacing="10" VerticalOptions="Center" >
+                        <Label x:Name="TitleofContent" Text="{Binding TitleofContent}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="#078ff0" TextColor="White" FontSize="16" Padding="5"/>
+                        <ListView x:Name="Content_DetailedList" HasUnevenRows="True" SeparatorColor="Silver" SelectionMode="None" VerticalOptions="Center" BackgroundColor="Transparent">
+                            <ListView.ItemTemplate >
+                                <DataTemplate x:DataType="local:AllowanceTransactions">
+                                    <ViewCell>
+                                        <VerticalStackLayout Spacing="0" Padding="10">
+                                            <VerticalStackLayout Spacing="5">
+
+                                                <Label Text="Amount" 
+               FontSize="16" 
+               TextColor="Navy" 
+               FontAttributes="Bold" />
+                                                <Label Text="{Binding GrossAmount}" 
+               FontSize="16" 
+               TextColor="Maroon" 
+               Margin="0, 0, 0, 10" />
+
+                                                <Label Text="Account No." 
+               FontSize="16" 
+               TextColor="Navy" 
+               FontAttributes="Bold" />
+                                                <Label Text="{Binding AccountNo}" 
+               FontSize="16" 
+               TextColor="Maroon" 
+               Margin="0, 0, 0, 10" />
+
+                                                <Label Text="IFSC" 
+               FontSize="16" 
+               TextColor="Navy" 
+               FontAttributes="Bold" />
+                                                <Label Text="{Binding IFSC}" 
+               FontSize="16" 
+               TextColor="Maroon" 
+               Margin="0, 0, 0, 10" />
+
+                                                <Label Text="For Month" 
+               FontSize="16" 
+               TextColor="Navy" 
+               FontAttributes="Bold" />
+                                                <Label Text="{Binding MonthYY}" 
+               FontSize="16" 
+               TextColor="Maroon" 
+               Margin="0, 0, 0, 10" />
+
+                                                <Label Text="Status" 
+               FontSize="16" 
+               TextColor="Navy" 
+               FontAttributes="Bold" />
+                                                <Label Text="{Binding TreaBillStatus}" 
+               FontSize="16" 
+               TextColor="Maroon" />
+
+                                            </VerticalStackLayout>
+                                        </VerticalStackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button Margin="10" x:Name="btn_close"  Clicked="btn_close_Clicked" Text="Close" FontAttributes="Bold" />
+                    </StackLayout>
+                </Border>
+            </StackLayout>
+        </ContentView>
+
+        <ContentView x:Name="Loading_activity"
+  BackgroundColor="#C0808080"
+  Padding="20"
+  IsVisible="False"
+  AbsoluteLayout.LayoutBounds="0,0,1,1"
+  AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+                                Text="Please Wait ..."
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

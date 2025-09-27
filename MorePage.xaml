@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.MorePage"
+             Title="More"
+             IconImageSource="ic_more.png">
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                  Grid.Column="1"
+                  FontSize="18"
+                  TextColor="White"
+                  FontAttributes="Bold"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_home.png" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid Margin="9" RowDefinitions="*, Auto">
+
+            <ScrollView Grid.Row="0" VerticalOptions="Fill">
+                <StackLayout>
+                    <StackLayout Margin="0" Spacing="10" >
+                        <Image Source="ic_launcher" HorizontalOptions="Center" WidthRequest="130" HeightRequest="100" />
+                        <Label x:Name="lbl_appname" FontSize="Large" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                        <Label x:Name="lbl_appversion" FontSize="Small" TextColor="Brown" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+
+                        <Label x:Name="Lbl_HP" TextColor="Black" HorizontalOptions="Center" HorizontalTextAlignment="Center" IsVisible="false"/>
+
+                        <StackLayout BackgroundColor="#F7F7F7" Orientation="Horizontal">
+                            <Label x:Name="lbl_dept" Text="Department Of Labour And Employment&#10;Government Of Himachal Pradesh" FontSize="18" TextColor="DarkBlue" FontAttributes="Bold" HorizontalOptions="Fill" HorizontalTextAlignment="Start" Margin="15,0,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Deptt_Call" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="ic_phone" HeightRequest="20"/>
+                            <Label x:Name="lbl_call" Text="Call Us" HorizontalOptions="Fill" Margin="10,0"/>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#F7F7F7" HeightRequest="1" Margin="20,0,0,0"/>
+
+                        <StackLayout Orientation="Horizontal" Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="deptt_WebSite" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="ic_website" HeightRequest="20"/>
+                            <Label x:Name="lbl_website" Text="Website" HorizontalOptions="Fill" Margin="10,0"/>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#F7F7F7" HeightRequest="1" Margin="20,0,0,0"/>
+
+                        <StackLayout Orientation="Horizontal" Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Deptt_email" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="ic_email" HeightRequest="20"/>
+                            <Label x:Name="lbl_email" Text="Email" HorizontalOptions="Fill" Margin="10,0"/>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#F7F7F7" HeightRequest="1" Margin="20,0,0,0"/>
+
+                        <StackLayout Orientation="Horizontal" Margin="5,0,0,0" HorizontalOptions="Fill" IsVisible="true">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="policytapped" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="policy.png" HeightRequest="20"/>
+                            <Label x:Name="lbl_policy" Text="Privacy Policy" HorizontalOptions="Fill"  Margin="10,0"/>
+                        </StackLayout>
+
+                        <BoxView BackgroundColor="#F7F7F7" HeightRequest="1" Margin="20,0,0,0"/>
+
+                        <StackLayout Orientation="Horizontal" Margin="5,0,0,0" HorizontalOptions="Fill">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="logoutTapped" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="ic_logout1.png" HeightRequest="20"/>
+                            <Label x:Name="lbl_logout" Text="Logout" HorizontalOptions="Fill"  Margin="10,0"/>
+                        </StackLayout>
+
+                        <Image Source="niclogo.png" HorizontalOptions="Center" WidthRequest="130" HeightRequest="50" ></Image>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <Grid Grid.Row="1" Style="{StaticResource FooterGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="2">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="3" >
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+        <ContentView x:Name="Loading_activity"
+   BackgroundColor="#C0808080"
+   Padding="20"
+   IsVisible="False"
+   AbsoluteLayout.LayoutBounds="0,0,1,1"
+   AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+             Text="Please Wait ..."
+             TextColor="Black"
+             FontAttributes="Bold"
+             VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

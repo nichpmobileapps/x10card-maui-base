@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.LoadWebViewPage"
+       >
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                   Grid.Column="1"
+                   FontSize="18"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_home.png" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill">
+
+            <Label x:Name="lbl_heading" FontSize="16" BackgroundColor="Navy" TextColor="White" Margin="5" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="Fill" VerticalOptions="Start"/>
+
+            <WebView x:Name="webview_loaddata" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </StackLayout>
+
+
+        <ContentView x:Name="Loading_activity"
+   BackgroundColor="#C0808080"
+   Padding="20"
+   IsVisible="False"
+   AbsoluteLayout.LayoutBounds="0,0,1,1"
+   AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+             Text="Please Wait ..."
+             TextColor="Black"
+             FontAttributes="Bold"
+             VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+
+    </Grid>
+</ContentPage>

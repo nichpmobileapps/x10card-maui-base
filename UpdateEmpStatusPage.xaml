@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.UpdateEmpStatusPage"
+             Title="UpdateEmpStatusPage"
+             IconImageSource="ic_update.png">
+
+
+
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                 Grid.Column="1"
+                 FontSize="18"
+                 TextColor="White"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+            <ToolbarItem IconImageSource="ic_home.png" Clicked="ToolbarItem_Clicked"/>
+        </ContentPage.ToolbarItems>
+
+
+
+        <Grid>
+            <Grid Margin="9" RowDefinitions="Auto, *, Auto">
+
+                <Label x:Name="lbl_header" 
+                   Grid.Row="0"
+                   BackgroundColor="#0072b6" 
+                   TextColor="White" 
+                   HorizontalOptions="Fill" 
+                   VerticalOptions="Center" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center"/>
+
+                <ScrollView Grid.Row="1" VerticalOptions="Fill">
+                    <StackLayout Padding="10">
+
+                        <Border Stroke="#078ff0" VerticalOptions="Fill" BackgroundColor="White" Padding="10">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+                            <StackLayout>
+
+                                <Label TextColor="Black" x:Name="lbl_EmploymentStatus" Text="Employment Status *" FontSize="16" FontAttributes="Bold" />
+                                <Picker TextColor="Black" TitleColor="Black" Title="Select Employment Status" x:Name="Picker_EmploymentStatus" SelectedIndexChanged="Picker_EmploymentStatus_SelectedIndexChanged"/>
+                                <StackLayout x:Name="stack_sector" IsVisible="false">
+                                    <Label TextColor="Black" x:Name="lbl_EmploymentSector" Text="Employment Sector *" FontSize="16" FontAttributes="Bold" />
+                                    <Picker TextColor="Black" TitleColor="Black" Title="Select Employment Sector" x:Name="Picker_EmploymentSector" SelectedIndexChanged="Picker_EmploymentSector_SelectedIndexChanged"/>
+                                </StackLayout>
+
+                                <StackLayout x:Name="stack_type" IsVisible="false">
+                                    <Label TextColor="Black" x:Name="lbl_ppvalues" Text="Employment Type *" FontSize="16" FontAttributes="Bold" />
+                                    <Picker TextColor="Black" TitleColor="Black" Title="Select Employment Type" x:Name="Picker_employmentype" SelectedIndexChanged="Picker_employmentype_SelectedIndexChanged"/>
+                                </StackLayout>
+
+                                <StackLayout x:Name="stack_organisationr" IsVisible="false">
+                                    <Label TextColor="Black" Text="Name of Organization *" FontSize="16" Padding="5" FontAttributes="Bold" />
+                                    <Editor Placeholder="Enter Name of Organization" x:Name="editor_organisation" AutoSize="TextChanges" FontSize="16" />
+                                </StackLayout>
+                                <Button Clicked="btn_updatestatus_Clicked" Text="Update" x:Name="btn_updatestatus" FontAttributes="Bold" FontSize="18" />
+
+                            </StackLayout>
+                        </Border>
+                    </StackLayout>
+                </ScrollView>
+
+                <Grid x:Name="grid_footerlabels" 
+                  Grid.Row="2"
+                  Style="{StaticResource FooterGridStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                        <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                        <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="2">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                        <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="3" >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                        <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+                    </StackLayout>
+
+                </Grid>
+            </Grid>
+
+        <ContentView x:Name="Loading_activity"
+                    BackgroundColor="#C0808080"
+                    Padding="20"
+                    IsVisible="False"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+                                Text="Please Wait ..."
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                VerticalTextAlignment="Center" />      
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+    </ContentPage>

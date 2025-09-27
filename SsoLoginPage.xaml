@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.SsoLoginPage"
+             Title="SsoLoginPage"
+             xmlns:local ="clr-namespace:X10Card.Models"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True">
+
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                   Grid.Column="1"
+                   FontSize="18"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <AbsoluteLayout>
+
+        <Grid RowDefinitions="*,Auto"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All">
+
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="15" Spacing="10">
+
+                    <Border Stroke="Silver"
+                            StrokeThickness="1"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="10">
+                        <VerticalStackLayout>
+                            <Label Text="Department Of Labour And Employment&#10; Government Of Himachal Pradesh"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="Navy"
+                                   FontSize="18"
+                                   FontAttributes="Bold" 
+                                   Margin="0,0,0,10"/>
+
+                            <Image Source="ic_launcher.png"
+                                   x:Name="img_launcher"
+                                   HorizontalOptions="Center"
+                                   HeightRequest="100" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="Silver"
+                            StrokeThickness="2"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="10">
+                        <VerticalStackLayout Spacing="10">
+
+
+                            <Image Source="ic_himachallogo.png"
+                                   HeightRequest="70"
+                                   HorizontalOptions="Center" />
+
+                            <Label Text="Him Access"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   TextColor="{StaticResource Primary}"
+                                   HorizontalOptions="Center" />
+                            <Label Text="Sign in to your account"
+                                   FontSize="16"
+                                   TextColor="{StaticResource Primary}" TextDecorations="Underline"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center" />
+
+                            <Border Stroke="LightGray" StrokeThickness="2" Margin="0" Padding="0" StrokeShape="RoundRectangle 10">
+                                <Grid ColumnDefinitions="4*,3*,3*">
+                                    <RadioButton x:Name="rb_himaccessid" 
+                                                 Content="Him Access ID"
+                                                 Grid.Column="0"
+                                                 GroupName="LoginType"
+                                                 Value="HimAccessId"                                                                
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center"
+                                                 CheckedChanged="rb_loginoptions_CheckedChanged"/>
+                                    <RadioButton x:Name="rb_mobile" 
+                                                 Content="Mobile"
+                                                 Grid.Column="1"
+                                                 GroupName="LoginType"
+                                                 Value="Mobile"               
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center" 
+                                                 CheckedChanged="rb_loginoptions_CheckedChanged"/>
+                                    <RadioButton x:Name="rb_others" 
+                                                 Content="Others"
+                                                 Grid.Column="2"
+                                                 GroupName="LoginType"
+                                                 Value="Others"             
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center" 
+                                                 CheckedChanged="rb_loginoptions_CheckedChanged"/>
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout x:Name="stack_himaccessid" IsVisible="False">
+                                <VerticalStackLayout>
+                                    <Label Text="Enter Him Access ID" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                        <Image Source="ic_registrationno.png"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+                                        <Entry Grid.Column="1"  x:Name="entry_HimAccessId" Placeholder="Enter Him Access ID" Keyboard="Numeric" MaxLength="10" />
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout>
+                                    <Label Text="Enter Password" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                        <Image Source="passwordicon.png"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+                                        <Entry  Grid.Column="1" x:Name="entry_HimAccessPassword" Placeholder="Enter password" IsPassword="True" Keyboard="Password" MaxLength="25"/>
+                                    </Grid>                                        
+                                </VerticalStackLayout>
+
+                               <Button x:Name="btn_getotphimaccess" 
+                                         Text="Get OTP"
+                                         CornerRadius="8"
+                                         Padding="10"
+                                         FontAttributes="Bold"
+                                         Margin="0,10" 
+                                         Clicked="sendOTPHimaccess_Clicked"/>
+
+                                <VerticalStackLayout x:Name="stack_enterotphimaccess" IsVisible="false">
+                                    <Label Text="Enter OTP" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                        <Image Source="ic_otp.png"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+                                        <Entry Grid.Column="1"  x:Name="entry_OTPhimaccess" Placeholder="Enter OTP" MaxLength="6" Keyboard="Numeric"/>
+                                    </Grid>
+
+                                    <Button x:Name="btn_submitotphimaccess" 
+                                            Text="Submit OTP"
+                                            CornerRadius="8"
+                                            Padding="10"
+                                            FontAttributes="Bold"
+                                            Margin="0,10"
+                                            Clicked="btn_submitotphimaccess_Clicked"/>
+                                </VerticalStackLayout>
+
+                                
+                            </VerticalStackLayout>
+
+
+                            <VerticalStackLayout x:Name="stack_mobile" IsVisible="False">
+
+                                <VerticalStackLayout>
+                                    <Label Text="Enter Mobile Number" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                        <Image Source="ic_mobile.png"
+                                              HeightRequest="40"
+                                              WidthRequest="40"
+                                              VerticalOptions="Center"
+                                              Margin="5,0"/>
+                                        <Entry  Grid.Column="1"   x:Name="entry_mobile" Placeholder="Enter Mobile Number" MaxLength="10" Keyboard="Numeric"/>
+                                    </Grid>
+
+                                    <Button x:Name="btn_getotp" 
+                                            Text="Get OTP"
+                                            CornerRadius="8"
+                                            Padding="10"
+                                            FontAttributes="Bold"
+                                            Margin="0,10" 
+                                            Clicked="sendOTP_Clicked"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout x:Name="stack_enterotp" IsVisible="false">
+                                    <Label Text="Enter OTP" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                        <Image Source="ic_otp.png"
+                                                HeightRequest="40"
+                                                WidthRequest="40"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+                                        <Entry  Grid.Column="1"   x:Name="entry_OTP" Placeholder="Enter OTP" MaxLength="6" Keyboard="Numeric"/>
+                                    </Grid>
+
+                                    <Button x:Name="btn_submitotp" 
+                                                Text="Submit OTP"
+                                                CornerRadius="8"
+                                                Padding="10"
+                                                FontAttributes="Bold"
+                                                Margin="0,10"
+                                                Clicked="VerifyOTP_Clicked"/>
+                                </VerticalStackLayout>
+
+
+                                <VerticalStackLayout x:Name="stack_usernamemobile" IsVisible="False">
+                                        <Label Text="Select UserName" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Picker x:Name="picker_usernamesmobile"  x:DataType="local:MultipleUser"  SelectedIndexChanged="picker_usernamesmobile_SelectedIndexChanged"/>
+                                    <Button x:Name="btn_submitusernamemobile" 
+                                                Text="SIGN IN"
+                                                CornerRadius="8"
+                                                Padding="10"
+                                                FontAttributes="Bold"
+                                                Margin="0,10"
+                                                Clicked="btn_submitusernamemobile_Clicked"/>
+                                </VerticalStackLayout>
+                                
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout x:Name="stack_others" IsVisible="False">
+                                <VerticalStackLayout>
+                                    <Label Text="Select Login Type" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                    <Picker x:Name="picker_others"  ItemsSource="{Binding LoginTypes}"  SelectedIndexChanged="Picker_others_SelectedIndexChanged"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout x:Name="stack_othersusername" IsVisible="False">
+                                    <VerticalStackLayout>
+                                        <Label Text="Enter Username" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                            <Image Source="ic_registrationno.png"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                        VerticalOptions="Center"
+                                                        Margin="5,0"/>
+                                            <Entry Grid.Column="1"  x:Name="entry_otherUsername" Placeholder="Enter Username" Keyboard="Text"  MaxLength="25"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout>
+                                        <Label Text="Enter Password" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                            <Image Source="passwordicon.png"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                        VerticalOptions="Center"
+                                                        Margin="5,0"/>
+                                            <Entry  Grid.Column="1"  x:Name="entry_otherPassword" Placeholder="Enter password" IsPassword="True" Keyboard="Password" MaxLength="25"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <Button x:Name="btn_otherlogin" 
+                                                    Text="Sign In"
+                                                    CornerRadius="8"
+                                                    Padding="10"
+                                                    FontAttributes="Bold"
+                                                    Margin="0,10"
+                                                    Clicked="btnUsernamePassword_Clicked"/>
+
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout x:Name="stack_aadhaar" IsVisible="False">
+                                    <VerticalStackLayout>
+                                        <Label Text="Enter Aadhaar number" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                            <Image Source="ic_contact.png"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                        VerticalOptions="Center"
+                                                        Margin="5,0"/>
+                                            <Entry  Grid.Column="1"  x:Name="entry_aadhaarno" Placeholder="Enter Aadhaar number" MaxLength="12" Keyboard="Numeric"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <Button x:Name="btn_getotpaadhaar" 
+                                                Text="Get OTP"
+                                                CornerRadius="8"
+                                                Padding="10"
+                                                FontAttributes="Bold"
+                                                Margin="0,10"
+                                                Clicked="btnaadharno_Clicked"/>
+
+                                    <VerticalStackLayout x:Name="stack_enterotpaadhaar" IsVisible="False">
+                                        <Label Text="Enter OTP" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                            <Image Source="ic_otp.png"
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            VerticalOptions="Center"
+                                                            Margin="5,0"/>
+                                            <Entry  Grid.Column="1"   x:Name="entry_aadhaarOTP" Placeholder="Enter OTP" MaxLength="6" Keyboard="Numeric"/>
+                                        </Grid>
+                                        <Button x:Name="btn_submitotpaadhaar" 
+                                                    Text="Submit OTP"
+                                                    CornerRadius="8"
+                                                    Padding="10"
+                                                    FontAttributes="Bold"
+                                                    Margin="0,10"
+                                                    Clicked="btnVerifyAadhaarOTP_Clicked"/>
+
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout x:Name="stack_emailidpassword" 
+                                                     IsVisible="False">
+                                    <VerticalStackLayout>
+                                        <Label Text="Enter Email" 
+                                                FontAttributes="Bold" 
+                                                TextColor="{StaticResource Primary}"/>
+
+                                        <Grid ColumnDefinitions="Auto,80*,10*" VerticalOptions="Center">
+                                            <Image Source="ic_email.png"
+                                                    HeightRequest="30"
+                                                    WidthRequest="30"
+                                                    VerticalOptions="Center"
+                                                    Margin="5,0"/>
+
+                                            <Entry Grid.Column="1"
+                                                   x:Name="entry_Email"
+                                                   Placeholder="Enter Email"
+                                                   MaxLength="100"
+                                                   Keyboard="Email"/>
+                                         
+                                            <ImageButton Grid.Column="2" x:Name="imgbtn_searchusername"
+                                                        Source="ic_search.png"                
+                                                        Clicked="imgbtn_searchusername_Clicked"
+                                                        Aspect="AspectFit"
+                                                        VerticalOptions="Center"
+                                                        HorizontalOptions="End"
+                                                        Margin="5,0"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout x:Name="stack_otheremailpassword" IsVisible="False">
+                                        <VerticalStackLayout>
+                                            <Label Text="Select UserName" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                            <Picker x:Name="picker_usernames" x:DataType="local:EmailUser"  SelectedIndexChanged="Picker_email_SelectedIndexChanged"/>
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout>
+                                            <Label Text="Enter Password" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                            <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                                <Image Source="passwordicon.png"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                        VerticalOptions="Center"
+                                                        Margin="5,0"/>
+                                                <Entry  Grid.Column="1"  x:Name="entry_emailPassword" Placeholder="Enter password" IsPassword="True" Keyboard="Password" MaxLength="25"/>
+                                            </Grid>
+                                        </VerticalStackLayout>
+
+                                        <Button x:Name="btn_submitemailpassword" 
+                                                Text="GET OTP"
+                                                CornerRadius="8"
+                                                Padding="10"
+                                                FontAttributes="Bold"
+                                                Margin="0,10"
+                                                Clicked="btnEmailIDPassword_Clicked"/>
+
+                                        <VerticalStackLayout x:Name="stack_enterotpemail" IsVisible="false">
+                                            <Label Text="Enter OTP" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                            <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+                                                <Image Source="ic_otp.png"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"
+                                                        VerticalOptions="Center"
+                                                        Margin="5,0"/>
+                                                <Entry  Grid.Column="1"   x:Name="entry_OTPemail" Placeholder="Enter OTP" MaxLength="6" Keyboard="Numeric"/>
+                                            </Grid>
+
+                                            <Button x:Name="btn_submitotpemail" 
+                                                    Text="Submit OTP"
+                                                    CornerRadius="8"
+                                                    Padding="10"
+                                                    FontAttributes="Bold"
+                                                    Margin="0,10"
+                                                    Clicked="VerifyOTPemail_Clicked"/>
+                                        </VerticalStackLayout>
+                                        
+
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Label Grid.Row="1"
+                   x:Name="lbl_footer"
+                   Text="Centre Of Competence For Mobile Application Development NIC Himachal Pradesh"
+                   FontSize="16"
+                   Padding="5"
+                   BackgroundColor="White"
+                   TextColor="Navy"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold" />
+        </Grid>
+
+        <ContentView x:Name="Loading_activity"
+                     BackgroundColor="#C0808080"
+                     Padding="20"
+                     IsVisible="false"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+                <Border Stroke="Black" StrokeThickness="1" BackgroundColor="White" Padding="6">
+                    <HorizontalStackLayout HorizontalOptions="Fill" Spacing="6">
+                        <ActivityIndicator IsRunning="True" Margin="5"/>
+                        <Label x:Name="lbl_PleaseWait"
+                               Text="Please Wait ..."
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Fill"
+                               VerticalTextAlignment="Center"/>
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+
+    </AbsoluteLayout>
+</ContentPage>

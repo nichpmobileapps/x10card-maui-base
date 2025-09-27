@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.ViewAllowances"
+             xmlns:local="clr-namespace:X10Card.Models">
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                 Grid.Column="1"
+                 FontSize="18"
+                 TextColor="White"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_home.png" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid Margin="9" RowDefinitions="Auto, *, Auto">
+
+            <Label x:Name="lbl_header" Grid.Row="0" BackgroundColor="#0072b6" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+            <StackLayout Grid.Row="1" VerticalOptions="Fill">
+
+                <SearchBar x:Name="searchbar_allowances" CancelButtonColor="Red" HorizontalOptions="Fill" Placeholder="Search" TextChanged="searchbar_allowances_TextChanged"/>
+
+                <Label IsVisible="false" x:Name="lblnorecords" Text="No Records Found" BackgroundColor="Red" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <Label IsVisible="false" x:Name="lblviedeatils" Text="#Tap to view details " TextColor="Maroon" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="14" HorizontalTextAlignment="Center"/>
+
+                <ListView x:Name="listview_allowancedetails" HasUnevenRows="True" SeparatorColor="#126b8a" 
+                          SelectionMode="None" ItemTapped="listview_allowancedetails_ItemTapped" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate x:DataType="local:AllowanceDetails">
+                            <ViewCell >
+                                <Border VerticalOptions="Start"  BackgroundColor="White" Stroke="#0072b6" Margin="0,10">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20"/>
+                                    </Border.StrokeShape>
+                                    <Border.Shadow>
+                                        <Shadow Brush="Transparent" Offset="0,0" Radius="0" Opacity="0"/>
+                                    </Border.Shadow>
+
+                                    <StackLayout Orientation="Vertical" Padding="10">
+                                        <VerticalStackLayout Spacing="5">
+
+                                            <Label FontSize="16" Text="Allowance" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding AllowanceDesc}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="Total Installments" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding TotInstallments}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="Installments Paid" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding InstallmentsPaid}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="Amount Paid" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding AmtPaid}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="Start Month" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding StartDt}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="End Month" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding EndDt}" TextColor="Maroon"  />
+
+                                            <Label FontSize="16" Text="Status" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding ApplicationStatus}" TextColor="{Binding ApplicationStatusTexcolor}"  />
+
+                                            <Label FontSize="16" Text="Exchange" TextColor="Navy" FontAttributes="Bold" />
+                                            <Label FontSize="16" Text="{Binding XchNm}" TextColor="Maroon" />
+
+                                        </VerticalStackLayout>
+                                    </StackLayout>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Grid Grid.Row="2" Style="{StaticResource FooterGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="2">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="3" >
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+
+        <ContentView x:Name="Loading_activity"
+   BackgroundColor="#C0808080"
+   Padding="20"
+   IsVisible="False"
+   AbsoluteLayout.LayoutBounds="0,0,1,1"
+   AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+             Text="Please Wait ..."
+             TextColor="Black"
+             FontAttributes="Bold"
+             VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

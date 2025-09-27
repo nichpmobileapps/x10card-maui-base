@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.ViewJobFairEmployersVacanciesPage"
+             xmlns:local="clr-namespace:X10Card.Models">
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                  Grid.Column="1"
+                  FontSize="18"
+                  TextColor="White"
+                  FontAttributes="Bold"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <Grid>
+        <Grid Margin="9" RowDefinitions="Auto, *, Auto">
+
+            <StackLayout Grid.Row="0">
+                <Label x:Name="lbl_header" BackgroundColor="#0072b6" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" VerticalOptions="Fill">
+
+                <ListView x:Name="listview_jobfairdetails" HasUnevenRows="True" SeparatorColor="#126b8a" SelectionMode="None" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate x:DataType="local:JobFairEmployersVacancies">
+                            <ViewCell >
+                                <Border VerticalOptions="Start" Margin="10" BackgroundColor="White" Stroke="#0072b6">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20"/>
+                                    </Border.StrokeShape>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label FontSize="16" Text="Description" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding vacdesc}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="Number Of Post" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding NoofPost}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="NCO" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding NcoCd}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="Designation" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding VacDesgOfPost}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="Interview Date" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding intdttm}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="Interview Place" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding IntPlace}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Label FontSize="16" Text="Age" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding agebw}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                        <Border Padding="10" IsVisible="{Binding ApplyDtVisibility}" VerticalOptions="Start" BackgroundColor="White" Stroke="Navy">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="10"/>
+                                            </Border.StrokeShape>
+                                            <StackLayout Orientation="Vertical">
+                                                <Label IsVisible="{Binding ApplyDtVisibility}" FontSize="16" Text="Apply Date" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                                <Label IsVisible="{Binding ApplyDtVisibility}" FontSize="16" Text="{Binding ApplyDt}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                                <Label IsVisible="{Binding Attend_DtVisibility}" FontSize="16" Text="Attended Date" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                                <Label IsVisible="{Binding Attend_DtVisibility}" FontSize="16" Text="{Binding Attend_Dt}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                                <Label IsVisible="{Binding Selected_DtVisibility}" FontSize="16" Text="Selected Date" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                                <Label IsVisible="{Binding Selected_DtVisibility}" FontSize="16" Text="{Binding Selected_Dt}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+
+                                                <Label IsVisible="{Binding joindtVisibility}" FontSize="16" Text="Join Date" TextColor="Navy" HorizontalTextAlignment="Start" FontAttributes="Bold"/>
+                                                <Label IsVisible="{Binding joindtVisibility}" FontSize="16" Text="{Binding joindt}" HorizontalOptions="Start" HorizontalTextAlignment="Start" TextColor="Maroon"/>
+                                            </StackLayout>
+                                        </Border>
+
+                                    </StackLayout>
+
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Grid Grid.Row="2" Style="{StaticResource FooterGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="2">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Grid.Row="0" Grid.Column="3" >
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                    <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+        <ContentView x:Name="Loading_activity"
+   BackgroundColor="#C0808080"
+   Padding="20"
+   IsVisible="False"
+   AbsoluteLayout.LayoutBounds="0,0,1,1"
+   AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="Transparent" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsRunning="True" IsVisible="True"/>
+                        <Label x:Name="lbl_PleaseWait"
+             Text="Please Wait ..."
+             TextColor="Black"
+             FontAttributes="Bold"
+             VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

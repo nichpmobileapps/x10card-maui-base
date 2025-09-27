@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.ViewAllVacanciesPage"
+             xmlns:local="clr-namespace:X10Card.Models"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <!-- TitleView -->
+    <NavigationPage.TitleView>
+        <HorizontalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="0">
+                <Label x:Name="lbl_navigation_header1"
+                      
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       Text="Department Of Labour &amp; Employment" />
+                <Label x:Name="lbl_navigation_header"
+                       
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </NavigationPage.TitleView>
+
+    <Grid>
+        <!-- Page Content -->
+        <VerticalStackLayout Margin="9">
+
+            <Label x:Name="lbl_header"
+                   BackgroundColor="#0072b6"
+                   TextColor="White"
+                   HorizontalOptions="Fill"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Tap to view vacancy details"
+                   HorizontalOptions="Fill"
+                   HorizontalTextAlignment="Center"
+                   FontSize="16"
+                   TextColor="Maroon"
+                   Margin="0"/>
+
+            <!-- Header Row -->
+            <Grid BackgroundColor="White" Padding="0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Employer Name"
+                       Grid.Column="0"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       TextColor="Navy"
+                       FontAttributes="Bold"/>
+                <Label Text="Vacancies"
+                       Grid.Column="1"
+                       VerticalOptions="Center"
+                       FontSize="16"
+                       TextColor="Navy"
+                       FontAttributes="Bold"
+                       HorizontalOptions="End"/>
+            </Grid>
+
+            <!-- Vacancy List -->
+            <ListView x:Name="DetailedList"
+                      Margin="0"
+                      HasUnevenRows="True"
+                      VerticalOptions="Fill"
+                      SeparatorVisibility="None"
+                      SelectionMode="None"
+                      ItemTapped="DetailedList_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:AllVacancyDetails" >
+                        <ViewCell>
+                            <Grid RowSpacing="5" Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding EmployerName}"
+                                       FontSize="17"
+                                       TextColor="Black"
+                                       VerticalOptions="Center"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding TotalVacancy}"
+                                       FontSize="17"
+                                       TextColor="Black"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       Grid.Column="1"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+      
+        <!-- Bottom Tabs -->
+        
+        <Grid VerticalOptions="End"
+              BackgroundColor="White"
+              Padding="5"
+              RowSpacing="0"
+              >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+           
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers> 
+        <Image  x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20"/>
+                <Label  x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}"/>
+            </VerticalStackLayout>
+
+    
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image  x:Name="Tab_UpdateEmpStatus_Image" Source="ic_update.png" HeightRequest="20"/>
+                <Label  x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}"/>
+            </VerticalStackLayout>
+
+            
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+        <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20"/>
+                <Label  x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}"/>
+            </VerticalStackLayout>
+
+           
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                </VerticalStackLayout.GestureRecognizers>
+                <Image x:Name="Tab_Settings_Image" Source="ic_more.png" HeightRequest="20"/>
+                <Label x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Vacancy Popup -->
+        <ContentView x:Name="popupvacancy"
+                     BackgroundColor="#C0808080"
+                     Padding="10"
+                     IsVisible="false"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White" >
+                <Label x:Name="lbl_popupvacancy"
+                       BackgroundColor="#0072b6"
+                       TextColor="White"
+                       Text="All Vacancy Details"
+                       Padding="6"
+                       HorizontalTextAlignment="Center"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <ListView x:Name="listview_vacancy"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:AllVacancyDetails">
+                            <ViewCell>
+                                <Border Stroke="Silver" StrokeThickness="1" Padding="10" Margin="5" BackgroundColor="White">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Gray" Offset="2,2" Radius="4" Opacity="0.5"/>
+                                    </Border.Shadow>
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"/>
+                                    </Border.StrokeShape>
+
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="Description" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding vacdesc}" TextColor="Maroon"/>
+
+                                        <Label Text="No. Of Post" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding NoofPost}" TextColor="Maroon"/>
+
+                                        <Label Text="Designation" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding VacDesgOfPost}" TextColor="Maroon"/>
+
+                                        <Label Text="Age Between" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding agebw}" TextColor="Maroon"/>
+
+                                        <Label Text="Interview Datetime" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding intdttm}" TextColor="Maroon"/>
+
+                                        <Label Text="Interview Place" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding IntPlace}" TextColor="Maroon"/>
+
+                                        <Label Text="Publish Date" FontAttributes="Bold" TextColor="Navy"/>
+                                        <Label Text="{Binding PublishDt}" TextColor="Maroon"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button Text="Close"
+                        BackgroundColor="#0072b6"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Margin="5"
+                        Clicked="popupvacancyCancel_Clicked"
+                        HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+        </ContentView>
+
+        <!-- Loading Popup -->
+        <ContentView x:Name="Loading_activity"
+                     BackgroundColor="#C0808080"
+                     Padding="20"
+                     IsVisible="false"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Border Stroke="LightGray" StrokeThickness="1" Padding="10" BackgroundColor="White">
+                    <HorizontalStackLayout Spacing="10">
+                        <ActivityIndicator IsVisible="True" IsRunning="True"/>
+                        <Label x:Name="Lbl_PleaseWait" Text="Please Wait ..." />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>

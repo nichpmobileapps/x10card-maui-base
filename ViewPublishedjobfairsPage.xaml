@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X10Card.ViewPublishedjobfairsPage"
+             xmlns:local="clr-namespace:X10Card.Models"
+             Title="ViewPublishedjobfairsPage">
+    <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Image Source="ic_himachallogo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Label Text="X10 (Registration Card)"
+                Grid.Column="1"
+                FontSize="18"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        </Grid>
+    </NavigationPage.TitleView>
+
+   
+        <Grid>
+            <StackLayout Margin="9" VerticalOptions="Fill">
+
+                <Label x:Name="lbl_header" BackgroundColor="#0072b6" TextColor="White" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <CollectionView x:Name="listview_jobfairdetails" SelectionMode="None" 
+                            VerticalOptions="Fill">
+
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:JobFairDetails">
+                            <Border VerticalOptions="Start" Margin="5" 
+                                Stroke="{StaticResource Blue200}" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+
+                                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
+                                  ColumnDefinitions="Auto, *" 
+                                  RowSpacing="0" Padding="10">
+
+                                    <Label FontSize="16" Text="District" TextColor="Navy" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding Distt}" TextColor="Maroon" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" />
+
+                                    <Label FontSize="16" Text="Exchange" TextColor="Navy" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding XchName}" TextColor="Maroon" Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" />
+
+                                    <Label FontSize="16" Text="Description" TextColor="Navy" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding remarks}" TextColor="Maroon" Grid.Row="2" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Venue" TextColor="Navy" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding venue}" TextColor="Maroon" Grid.Row="3" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Date" TextColor="Navy" FontAttributes="Bold" Grid.Row="4" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding JobfairDate}" TextColor="Maroon" Grid.Row="4" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Officer Incharge" TextColor="Navy" FontAttributes="Bold" Grid.Row="5" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding officer_incharge}" TextColor="Maroon" Grid.Row="5" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Officer Mobile" TextColor="Navy" FontAttributes="Bold" Grid.Row="6" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding officer_mobile}" TextColor="Maroon" Grid.Row="6" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Officer Email" TextColor="Navy" FontAttributes="Bold" Grid.Row="7" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding officer_email}" TextColor="Maroon" Grid.Row="7" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <Label FontSize="16" Text="Published On" TextColor="Navy" FontAttributes="Bold" Grid.Row="8" Grid.Column="0"/>
+                                    <Label FontSize="16" Text="{Binding PublishDt}" TextColor="Maroon" Grid.Row="8" Grid.Column="1" Margin="10,0,0,0"/>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="Navy" 
+                                             Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0">
+
+                                        <Button Clicked="btn_viewemployers_Clicked" CommandParameter="{Binding JobfairID}" 
+                                            Padding="10" FontSize="16" Text="View Employers" TextColor="White" 
+                                            BackgroundColor="Transparent" HorizontalOptions="Center" FontAttributes="Bold" />
+                                        <Image Source="ic_officerwhite.png" Aspect="AspectFit" HeightRequest="30"/>
+                                    </StackLayout>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Grid VerticalOptions="End" Style="{StaticResource FooterGridStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0" HorizontalOptions="Fill">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_Home_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Home_Image" Source="ic_home.png" HeightRequest="20" HorizontalOptions="Center"/>
+                    <Label x:Name="Tab_Home_Label" Text="Home" Style="{StaticResource LabelStyle_TabMenu}" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                    <StackLayout Grid.Column="1" HorizontalOptions="Fill">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_UpdateEmpStatus_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_UpdateEmpStatus_Image"  Source="ic_update.png" HeightRequest="20" HorizontalOptions="Center"/>
+                    <Label x:Name="Tab_UpdateEmpStatus_Label" Text="Employment Status" Style="{StaticResource LabelStyle_TabMenu}" HorizontalOptions="Center"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="2" HorizontalOptions="Fill">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_ViewAllowances_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_ViewAllowances_Image" Source="ic_allowance.png" HeightRequest="20" HorizontalOptions="Center"/>
+                    <Label x:Name="Tab_ViewAllowances_Label" Text="Allowances" Style="{StaticResource LabelStyle_TabMenu}" HorizontalOptions="Center"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="3" HorizontalOptions="Fill">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Tab_Settings_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    <Image x:Name="Tab_Settings_Image"  Source="ic_more.png" HeightRequest="20" HorizontalOptions="Center"/>
+                    <Label  x:Name="Tab_Settings_Label" Text="More" Style="{StaticResource LabelStyle_TabMenu}" HorizontalOptions="Center"/>
+                    </StackLayout>
+
+                </Grid>
+
+            </StackLayout>
+
+            <ContentView x:Name="Loading_activity" BackgroundColor="#C0808080" Padding="20" IsVisible="false" 
+                     AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Grid.Row="0" Grid.Column="0">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Border Style="{StaticResource FrameLoadingStyle}">
+                        <StackLayout Orientation="Horizontal" Padding="6">
+                            <ActivityIndicator IsVisible="true" IsRunning="true" Margin="5"/>
+                            <Label x:Name="Lbl_PleaseWait" Text="Please Wait ..." Style="{StaticResource LabelStyle}" HorizontalOptions="Fill" />
+                        </StackLayout>
+                    </Border>
+                </StackLayout>
+            </ContentView>
+        </Grid>
+    </ContentPage>
